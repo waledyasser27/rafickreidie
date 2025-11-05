@@ -840,6 +840,54 @@ document.addEventListener('DOMContentLoaded', () => {
     positionQuickActions();
     window.addEventListener('resize', positionQuickActions);
     window.addEventListener('scroll', positionQuickActions, { passive: true });
+
+    // Mobile: auto-rotate a single quick action button (like a notification)
+    function initFQACycler(){
+        const wrap = document.querySelector('.floating-quick-actions');
+        if (!wrap) return;
+        const buttons = Array.from(wrap.querySelectorAll('.fqa-btn'));
+        if (!buttons.length) return;
+
+        let idx = 0;
+        let timer = null;
+        const intervalMs = 2800;
+
+        function applyActive(){
+            buttons.forEach((b,i)=> b.classList.toggle('active', i === idx));
+        }
+        function start(){
+            stop();
+            timer = setInterval(()=>{
+                if (window.innerWidth > 768) return; // only rotate on mobile
+                idx = (idx + 1) % buttons.length;
+                applyActive();
+            }, intervalMs);
+        }
+        function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+
+        // Pause on interaction
+        ['mouseenter','touchstart','pointerdown','focusin'].forEach(ev=>{
+            wrap.addEventListener(ev, stop, { passive: true });
+        });
+        ['mouseleave','touchend','pointerup','blur'].forEach(ev=>{
+            wrap.addEventListener(ev, start, { passive: true });
+        });
+
+        // React to resize: ensure one visible on mobile, show all on desktop
+        function onResize(){
+            if (window.innerWidth <= 768) {
+                applyActive();
+                start();
+            } else {
+                stop();
+                buttons.forEach(b=> b.classList.add('active')); // desktop shows all
+            }
+        }
+        window.addEventListener('resize', onResize);
+        // init
+        onResize();
+    }
+    initFQACycler();
 });
 
 // ========== Partners Carousel ==========
