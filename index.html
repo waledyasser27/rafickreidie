@@ -18,6 +18,9 @@
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
+    
     <!-- Favicon (uses header logo) -->
     <link rel="icon" type="image/png" href="rafikk.png">
     <link rel="shortcut icon" type="image/png" href="rafikk.png">
@@ -585,21 +588,21 @@
                 </p>
             </div>
 
-            <div class="partners-carousel" data-aos="fade-up" data-aos-delay="100">
-                <button class="carousel-btn prev" aria-label="Previous">‹</button>
-                <div class="partners-track" id="partnersTrack">
+            <div class="partners-swiper swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
                     <!-- ضع رابط صورة الشريك هنا باستبدال قيمة src بكل شعار. استبدل كلمة PARTNER في alt باسم الشريك -->
-                    <div class="partner-slide"><img loading="lazy" decoding="async" src="customers/botique.png" alt="PARTNER 1"></div>
-                    <div class="partner-slide"><img loading="lazy" decoding="async" src="customers/dallahbaraka.png" alt="PARTNER 2"></div>
-                    <div class="partner-slide"><img loading="lazy" decoding="async" src="customers/mercedes.png" alt="PARTNER 3"></div>
-                    <div class="partner-slide"><img loading="lazy" decoding="async" src="customers/abdelkarimbakr.png" alt="PARTNER 4"></div>
-                    <div class="partner-slide"><img loading="lazy" decoding="async" src="customers/aquat.jfif" alt="PARTNER 5"></div>
-                    <div class="partner-slide"><img loading="lazy" decoding="async" src="customers/kingabdelaziz.jfif" alt="PARTNER 5"></div>
-                    <div class="partner-slide"><img loading="lazy" decoding="async" src="customers/aujan.png" alt="PARTNER 5"></div>
-                    <div class="partner-slide"><img loading="lazy" decoding="async" src="customers/omatra.png" alt="PARTNER 5"></div>
-
+                    <div class="swiper-slide"><div class="partner-slide"><img loading="lazy" decoding="async" src="customers/botique.png" alt="PARTNER 1"></div></div>
+                    <div class="swiper-slide"><div class="partner-slide"><img loading="lazy" decoding="async" src="customers/dallahbaraka.png" alt="PARTNER 2"></div></div>
+                    <div class="swiper-slide"><div class="partner-slide"><img loading="lazy" decoding="async" src="customers/mercedes.png" alt="PARTNER 3"></div></div>
+                    <div class="swiper-slide"><div class="partner-slide"><img loading="lazy" decoding="async" src="customers/abdelkarimbakr.png" alt="PARTNER 4"></div></div>
+                    <div class="swiper-slide"><div class="partner-slide"><img loading="lazy" decoding="async" src="customers/aquat.jfif" alt="PARTNER 5"></div></div>
+                    <div class="swiper-slide"><div class="partner-slide"><img loading="lazy" decoding="async" src="customers/kingabdelaziz.jfif" alt="PARTNER 5"></div></div>
+                    <div class="swiper-slide"><div class="partner-slide"><img loading="lazy" decoding="async" src="customers/aujan.png" alt="PARTNER 5"></div></div>
+                    <div class="swiper-slide"><div class="partner-slide"><img loading="lazy" decoding="async" src="customers/omatra.png" alt="PARTNER 5"></div></div>
                 </div>
-                <button class="carousel-btn next" aria-label="Next">›</button>
+                <div class="swiper-button-prev" aria-label="Previous"></div>
+                <div class="swiper-button-next" aria-label="Next"></div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
@@ -926,5 +929,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="js/main.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+    
 </body>
 </html>
