@@ -91,34 +91,38 @@ html[dir="rtl"] .floating-quick-actions {
     left: 20px;
 }
 
+/* Disable Floating Quick Actions completely */
+.floating-quick-actions, .fqa-btn { display: none !important; }
+
 @media (max-width: 768px) {
     .floating-quick-actions {
         left: 0;
         right: 0;
-        padding: 0 10px;
+        padding: 0 12px;
         top: 90px; /* under fixed header */
         bottom: auto;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        align-items: stretch;
-        justify-items: stretch;
-        gap: 6px;
+        display: block; /* single button view */
         z-index: 1002;
     }
     .fqa-btn {
-        display: inline-flex;
+        display: none; /* show only the active one */
         justify-content: center;
         align-items: center;
-        min-height: 44px;
-        padding: 10px 10px;
-        font-size: 13px;
+        min-height: 46px;
+        padding: 12px 14px;
+        font-size: 14px;
         line-height: 1;
         text-align: center;
-        border: 1px solid rgba(212,175,55,0.6);
-        background: rgba(17,17,17,0.85);
+        border: 1px solid rgba(212,175,55,0.65);
+        background: rgba(17,17,17,0.9);
         white-space: nowrap;
-        min-width: 0; /* allow grid to shrink */
+        min-width: 0;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.38s ease, transform 0.38s ease;
     }
+    .fqa-btn.active { display: inline-flex; opacity: 1; transform: translateY(0); }
 }
 
 /* ========== Services Background: real educational image with transparent overlay ========== */
