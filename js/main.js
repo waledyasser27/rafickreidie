@@ -869,7 +869,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // reset when reaching the end of first set
             const maxScroll = track.scrollWidth / 2; // original width
             if (track.scrollLeft >= maxScroll) {
-                track.scrollLeft = 0;
+                track.scrollLeft -= maxScroll; // seamless wrap without jump
             }
         }
         rafId = requestAnimationFrame(loop);
