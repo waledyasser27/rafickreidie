@@ -102,7 +102,7 @@ html[dir="rtl"] .floating-quick-actions {
         grid-template-columns: repeat(3, 1fr);
         align-items: stretch;
         justify-items: stretch;
-        gap: 8px;
+        gap: 6px;
         z-index: 1002;
     }
     .fqa-btn {
@@ -110,10 +110,14 @@ html[dir="rtl"] .floating-quick-actions {
         justify-content: center;
         align-items: center;
         min-height: 44px;
-        padding: 10px 12px;
-        font-size: 14px;
+        padding: 10px 10px;
+        font-size: 13px;
         line-height: 1;
         text-align: center;
+        border: 1px solid rgba(212,175,55,0.6);
+        background: rgba(17,17,17,0.85);
+        white-space: nowrap;
+        min-width: 0; /* allow grid to shrink */
     }
 }
 
@@ -375,6 +379,11 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
 }
+
+/* Hard-stop any accidental horizontal overflow on small screens */
+html, body { max-width: 100%; overflow-x: hidden; }
+.header, .hero, .services, .about, .projects, .partners, .divisions, .stats, .contact, .career { overflow-x: clip; }
+.container { overflow-x: clip; }
 
 html[dir="ltr"] body {
     font-family: var(--font-en);
