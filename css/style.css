@@ -1497,6 +1497,13 @@ textarea.form-input {
 .partners-swiper .swiper-pagination-bullet { background: rgba(212,175,55,0.45); opacity: 1; }
 .partners-swiper .swiper-pagination-bullet-active { background: var(--color-gold); }
 
+/* Move pagination below the slides */
+.partners-swiper .swiper-pagination {
+    position: static;
+    margin-top: 14px;
+    text-align: center;
+}
+
 /* ========== Footer ========== */
 .footer {
     background: var(--color-dark);
