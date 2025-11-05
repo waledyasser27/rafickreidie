@@ -890,69 +890,38 @@ document.addEventListener('DOMContentLoaded', () => {
     initFQACycler();
 });
 
-// ========== Partners Carousel ==========
-// ضع روابط صور الشركاء داخل عناصر <img> في index.html داخل .partners-track
-// فقط استبدل رابط placeholder وأكتب اسم الشريك مكان PARTNER في alt
-(() => {
-    const track = document.getElementById('partnersTrack');
-    if (!track) return;
-
-    const prevBtn = document.querySelector('.partners-carousel .prev');
-    const nextBtn = document.querySelector('.partners-carousel .next');
-    let rafId = null;
-    let paused = false;
-    let speed = 0.6; // px per frame (~36px/s)
-
-    // Duplicate slides to create a seamless loop
-    const slides = Array.from(track.children);
-    slides.forEach(slide => {
-        const clone = slide.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        track.appendChild(clone);
-    });
-
-    function loop() {
-        if (!paused) {
-            track.scrollLeft += speed;
-            // reset when reaching the end of first set
-            const maxScroll = track.scrollWidth / 2; // original width
-            if (track.scrollLeft >= maxScroll) {
-                track.scrollLeft -= maxScroll; // seamless wrap without jump
-            }
+// ========== Partners Carousel (Swiper) ==========
+function initPartnersSwiper(){
+    if (typeof Swiper === 'undefined') return;
+    const container = document.querySelector('.partners-swiper');
+    if (!container) return;
+    const swiper = new Swiper('.partners-swiper', {
+        loop: true,
+        speed: 700,
+        autoplay: {
+            delay: 1000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+        },
+        slidesPerView: 1.3,
+        spaceBetween: 16,
+        breakpoints: {
+            480: { slidesPerView: 2, spaceBetween: 16 },
+            640: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 24 },
+            1280: { slidesPerView: 5, spaceBetween: 24 }
+        },
+        navigation: {
+            nextEl: '.partners-swiper .swiper-button-next',
+            prevEl: '.partners-swiper .swiper-button-prev'
+        },
+        pagination: {
+            el: '.partners-swiper .swiper-pagination',
+            clickable: true
         }
-        rafId = requestAnimationFrame(loop);
-    }
-
-    function start() {
-        if (rafId == null) rafId = requestAnimationFrame(loop);
-    }
-    function stop() {
-        if (rafId != null) cancelAnimationFrame(rafId);
-        rafId = null;
-    }
-
-    // Pause on interaction
-    ['mouseenter', 'focusin', 'touchstart', 'pointerdown'].forEach(ev => {
-        track.addEventListener(ev, () => { paused = true; }, { passive: true });
     });
-    ['mouseleave', 'focusout', 'touchend', 'pointerup', 'blur'].forEach(ev => {
-        track.addEventListener(ev, () => { paused = false; }, { passive: true });
-    });
-
-    // Button controls
-    function scrollBySlide(dir = 1) {
-        const slide = track.querySelector('.partner-slide');
-        if (!slide) return;
-        const amount = (slide.getBoundingClientRect().width + 24) * dir; // include gap
-        track.scrollBy({ left: amount, behavior: 'smooth' });
-    }
-    prevBtn && prevBtn.addEventListener('click', () => scrollBySlide(-1));
-    nextBtn && nextBtn.addEventListener('click', () => scrollBySlide(1));
-
-    // Respect user motion preferences
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!prefersReduced.matches) start();
-})();
+}
+document.addEventListener('DOMContentLoaded', initPartnersSwiper);
 
 // ========== Reveal Animations for text over images ==========
 function initRevealAnimations(){
